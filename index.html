@@ -36,15 +36,68 @@
         }
 
         .container {
-            max-width: 800px;
+            max-width: 850px;
             margin: 0 auto;
             background: var(--card-bg);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             padding: 60px;
             border-radius: 20px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
             border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        /* Language Switcher */
+        .lang-switcher {
+            position: absolute;
+            top: 24px;
+            right: 40px;
+            display: flex;
+            gap: 8px;
+            background: #f1f5f9;
+            padding: 4px;
+            border-radius: 10px;
+        }
+
+        .lang-btn {
+            padding: 6px 14px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-sub);
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .lang-btn.active {
+            background: white;
+            color: var(--accent);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Language Content Control */
+        [data-lang-content] {
+            display: none;
+        }
+
+        [data-lang-content].active {
+            display: block;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         header {
@@ -158,9 +211,17 @@
             font-weight: 600;
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 650px) {
             .container {
-                padding: 30px;
+                padding: 40px 24px;
+            }
+
+            .lang-switcher {
+                position: relative;
+                top: 0;
+                right: 0;
+                justify-content: center;
+                margin-bottom: 30px;
             }
 
             h1 {
@@ -173,102 +234,406 @@
 <body>
 
     <div class="container">
-        <header>
-            <h1>뭐했지 (DidI)</h1>
-            <p>개인정보처리방침 (Privacy Policy)</p>
-            <p class="last-updated">최종 수정일: 2026년 4월 18일</p>
-        </header>
+        <!-- Language Switcher -->
+        <div class="lang-switcher">
+            <button class="lang-btn" onclick="setLanguage('ko')">한국어</button>
+            <button class="lang-btn" onclick="setLanguage('en')">English</button>
+            <button class="lang-btn" onclick="setLanguage('ja')">日本語</button>
+        </div>
 
-        <section>
-            <h2>1. 데이터 처리 원칙</h2>
-            <p><strong>"뭐했지 (DidI)"</strong> 앱은 사용자의 프라이버시를 최우선으로 생각합니다. 본 서비스는 사용자의 일상 데이터를 기기 내부에서 처리하는 <strong>'로컬 우선(Local-first)'</strong> 철학을 유지하며, AI 기능을 포함한 모든 서비스에서 개인을 식별할 수 있는 정보를 외부에 무단으로 노출하지 않는 것을 절대 원칙으로 합니다.</p>
-            <div class="highlight-box">
-                <p>앱을 통해 기록되는 상세 위치와 앱 사용 기록은 기술적으로 보호되며, AI 분석 등 서버 처리가 필요한 경우에도 개인 장소명을 제거하는 등 철저한 비식별화 과정을 거칩니다.</p>
-            </div>
-        </section>
+        <!-- KOREAN CONTENT (PRESERVED 100%) -->
+        <div data-lang-content="ko">
+            <header>
+                <h1>뭐했지 (DidI)</h1>
+                <p class="last-updated"><span id="last-updated-label-ko">최종 수정일:</span> <span class="last-updated-date"></span></p>
+            </header>
 
-        <section>
-            <h2>2. 수집 및 활용하는 데이터 항목</h2>
-            <p>앱의 주요 기능인 '자동 활동 기록'을 위해 다음과 같은 정보에 접근하고 처리합니다.</p>
+            <section>
+                <h2>1. 데이터 처리 원칙</h2>
+                <p><strong>"뭐했지 (DidI)"</strong> 앱은 사용자의 프라이버시를 최우선으로 생각합니다. 본 서비스는 사용자의 일상 데이터를 기기 내부에서 처리하는
+                    <strong>'로컬
+                        우선(Local-first)'</strong> 철학을 유지하며, AI 기능을 포함한 모든 서비스에서 개인을 식별할 수 있는 정보를 외부에 무단으로 노출하지 않는 것을 절대
+                    원칙으로
+                    합니다.</p>
+                <div class="highlight-box">
+                    <p>앱을 통해 기록되는 상세 위치와 앱 사용 기록은 기술적으로 보호되며, AI 분석 등 서버 처리가 필요한 경우에도 개인 장소명을 제거하는 등 철저한 비식별화 과정을 거칩니다.
+                    </p>
+                </div>
+            </section>
 
-            <div class="data-card">
-                <h3>A. 기기 내 로컬 처리 데이터 (서버 전송 없음)</h3>
+            <section>
+                <h2>2. 수집 및 활용하는 데이터 항목</h2>
+                <p>앱의 주요 기능인 '자동 활동 기록'을 위해 다음과 같은 정보에 접근하고 처리합니다.</p>
+
+                <div class="data-card">
+                    <h3>A. 기기 내 로컬 처리 데이터 (서버 전송 없음)</h3>
+                    <ul>
+                        <li><strong>위치 정보 (Background Location):</strong> 하루 이동 경로 및 머무른 장소를 파악하여 타임라인을 구성하기 위해 사용됩니다.
+                        </li>
+                        <li><strong>앱 사용 통계 (Usage Stats):</strong> 특정 시간에 어떤 앱을 사용했는지 분석하여 활동(예: 공부, SNS, 영상 시청)을
+                            추론합니다.
+                        </li>
+                        <li><strong>활동 인식 (Activity Recognition):</strong> 사용자의 이동 상태(걷기, 차량 이동, 정지)를 감지하여 기록의 정확도를
+                            높입니다.
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="data-card">
+                    <h3>B. 선택적 클라우드 동기화 데이터 (사용자 선택 시)</h3>
+                    <p>기기 변경이나 데이터 백업을 위해 사용자가 '클라우드 동기화'를 활성화할 경우에만 다음 데이터를 서버에 보관합니다.</p>
+                    <ul>
+                        <li><strong>암호화된 활동 기록:</strong> 타임라인 데이터 및 사용자 설정 정보. 모든 데이터는 **군사 수준의 AES-256 암호화**를 거쳐 저장되며,
+                            본인
+                            외에는 누구도 해독할 수 없습니다.</li>
+                        <li><strong>소셜 로그인 식별자:</strong> Google 계정을 통한 사용자 인증 정보 (본인 확인 및 데이터 소유권 검증용).</li>
+                    </ul>
+                </div>
+
+                <div class="data-card">
+                    <h3>C. AI 데일리 인사이트 처리 데이터 (사용자 활성 시)</h3>
+                    <p>사용자가 'AI 데일리 인사이트' 기능을 켤 경우, 매일 밤 하루의 요약을 위해 다음 데이터를 일시적으로 서버에서 처리합니다.</p>
+                    <ul>
+                        <li><strong>비식별화된 활동 요약:</strong> 시간대별 활동 유형과 장소 카테고리(예: 집, 회사, 카페) 정보. <span
+                                class="important-text">※ 사용자가 직접 설정한 고유 지점명이나 상세 주소는 전송 전 모두 제거됩니다.</span></li>
+                        <li><strong>일기 텍스트:</strong> 사용자가 당일 작성한 일기 내용(선택 사항).</li>
+                        <li><strong>데이터 보호 및 파기:</strong> 전송된 데이터는 AI 모델의 학습(Training)에 절대 활용되지 않으며, 인사이트 생성 즉시 서버 메모리에서
+                            소멸됩니다. (OpenAI API 정책에 따라 보안 모니터링을 위해 암호화된 상태로 30일간 보관 후 영구 파기)</li>
+                    </ul>
+                </div>
+
+                <div class="data-card">
+                    <h3>D. 서비스 개선을 위한 익명 통계</h3>
+                    <ul>
+                        <li><strong>익명 기능 선호도:</strong> 사용자가 어떤 인사이트 스타일(감성형/이성형)을 선호하는지에 대한 단순 카운트 데이터를 수집합니다. 해당 정보는
+                            개인을
+                            식별하거나 다른 데이터와 결합될 수 없는 완전한 익명 통계로 관리됩니다.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h2>3. 특수 권한 사용 안내</h2>
+                <p>본 앱은 자동 기록 기능을 위해 안드로이드 시스템의 다음 권한을 요청합니다.</p>
                 <ul>
-                    <li><strong>위치 정보 (Background Location):</strong> 하루 이동 경로 및 머무른 장소를 파악하여 타임라인을 구성하기 위해 사용됩니다.</li>
-                    <li><strong>앱 사용 통계 (Usage Stats):</strong> 특정 시간에 어떤 앱을 사용했는지 분석하여 활동(예: 공부, SNS, 영상 시청)을 추론합니다.</li>
-                    <li><strong>활동 인식 (Activity Recognition):</strong> 사용자의 이동 상태(걷기, 차량 이동, 정지)를 감지하여 기록의 정확도를 높입니다.</li>
+                    <li><strong>백그라운드 위치 액세스:</strong> 앱이 화면에 떠 있지 않을 때도 위치 변화를 감지하여 끊김 없는 타임라인을 구성하기 위해 필수적입니다.</li>
+                    <li><strong>사용 정보 액세스:</strong> 앱별 사용 시간을 쿼리하여 현재 사용자가 무엇을 하고 있는지 지능적으로 추론하기 위해 사용됩니다.</li>
                 </ul>
-            </div>
+            </section>
 
-            <div class="data-card">
-                <h3>B. 선택적 클라우드 동기화 데이터 (사용자 선택 시)</h3>
-                <p>기기 변경이나 데이터 백업을 위해 사용자가 '클라우드 동기화'를 활성화할 경우에만 다음 데이터를 서버에 보관합니다.</p>
+            <section>
+                <h2>4. 데이터 보관 및 파기</h2>
+                <p>로컬 데이터는 앱 삭제 시 함께 제거됩니다. 클라우드 동기화를 사용 중인 경우, <strong>앱 내 '설정 > 계정 관리' 메뉴의 [계정 삭제]</strong> 기능을 통해 서버에
+                    보관된
+                    모든 암호화 데이터를 즉시 영구 삭제할 수 있습니다.</p>
+            </section>
+
+            <section id="delete-account">
+                <h2>5. 웹을 통한 계정 및 데이터 삭제 요청</h2>
+                <p>앱을 이미 삭제했거나 앱에 접속할 수 없는 경우, 아래의 방법으로 데이터 삭제를 요청하실 수 있습니다.</p>
+                <div class="contact-box">
+                    <ul>
+                        <li><strong>요청 방법:</strong> 지원 이메일로 가입 시 사용한 Google 계정 정보를 기재하여 발송</li>
+                        <li><strong>이메일 주소:</strong> <a
+                                href="mailto:support@franholdings.cloud?subject=DidI 계정 삭제 요청">support@franholdings.cloud</a>
+                        </li>
+                        <li><strong>처리 기간:</strong> 접수 후 영업일 기준 7일 이내 데이터 파기 및 회신</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h2>6. 제3자 서비스 제공</h2>
+                <p>안정적인 서비스 제공 및 고품질 AI 인사이트 생성을 위해 아래 외부 서비스를 활용합니다. 각 서비스는 엄격한 데이터 보호 표준을 준수합니다.</p>
                 <ul>
-                    <li><strong>암호화된 활동 기록:</strong> 타임라인 데이터 및 사용자 설정 정보. 모든 데이터는 **군사 수준의 AES-256 암호화**를 거쳐 저장되며, 본인 외에는 누구도 해독할 수 없습니다.</li>
-                    <li><strong>소셜 로그인 식별자:</strong> Google 계정을 통한 사용자 인증 정보 (본인 확인 및 데이터 소유권 검증용).</li>
+                    <li><strong>Google Firebase:</strong> 사용자 인증(Auth), 암호화된 데이터 보관(Firestore) 및 익명 통계 수집(Analytics)을 위한
+                        인프라
+                        제공.</li>
+                    <li><strong>OpenAI:</strong> AI 데일리 인사이트 메시지 생성을 위한 인공지능 엔진 제공. (전송된 데이터는 모델 학습에 사용되지 않음)</li>
                 </ul>
-            </div>
+            </section>
 
-            <div class="data-card">
-                <h3>C. AI 데일리 인사이트 처리 데이터 (사용자 활성 시)</h3>
-                <p>사용자가 'AI 데일리 인사이트' 기능을 켤 경우, 매일 밤 하루의 요약을 위해 다음 데이터를 일시적으로 서버에서 처리합니다.</p>
+            <section>
+                <h2>7. 문의처</h2>
+                <div class="contact-box">
+                    <p>프라이버시 정책과 관련하여 궁금한 점이 있으시다면 아래로 연락 부탁드립니다.</p>
+                    <p style="margin-top: 10px;"><strong>지원 팀:</strong> support@franholdings.cloud</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- ENGLISH CONTENT (FULL DETAIL + GDPR) -->
+        <div data-lang-content="en">
+            <header>
+                <h1>DidI</h1>
+                <p class="last-updated"><span id="last-updated-label-en">Last Updated:</span> <span class="last-updated-date"></span></p>
+            </header>
+
+            <section>
+                <h2>1. Principles of Data Processing</h2>
+                <p><strong>"DidI"</strong> app prioritizes your privacy above all else. We adhere to a
+                    <strong>'Local-first'</strong> philosophy, processing your daily life data directly on your device.
+                    Our core principle is never to expose personally identifiable information to external parties for AI
+                    features or any other services.</p>
+                <div class="highlight-box">
+                    <p>Detailed location and app usage records are technically protected. Even when server processing is
+                        required (e.g., for AI analysis), data undergoes strict de-identification, including the removal
+                        of specific place names.</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>2. Data Items Collected and Used</h2>
+                <p>To provide the core 'Automatic Activity Logging' feature, we access and process the following
+                    information:</p>
+
+                <div class="data-card">
+                    <h3>A. Locally Processed Data (On-device, No Server Transmission)</h3>
+                    <ul>
+                        <li><strong>Background Location:</strong> Used to identify daily movement paths and stayed
+                            locations to construct your timeline.</li>
+                        <li><strong>Usage Stats:</strong> Analyzes which apps were used at specific times to infer
+                            activities (e.g., studying, SNS, watching videos).</li>
+                        <li><strong>Activity Recognition:</strong> Detects your movement state (walking, driving,
+                            stationary) to improve log accuracy.</li>
+                    </ul>
+                </div>
+
+                <div class="data-card">
+                    <h3>B. Optional Cloud Synchronization Data (User-selected)</h3>
+                    <p>Only if you enable 'Cloud Sync' for device changes or data backup, the following data is stored
+                        on our servers:</p>
+                    <ul>
+                        <li><strong>Encrypted Activity Records:</strong> Timeline data and user settings. All data is
+                            stored with **Military-grade AES-256 encryption**, and no one except the user can decrypt
+                            it.</li>
+                        <li><strong>Social Login Identifiers:</strong> Authentication info via Google (for identity
+                            verification and data ownership validation).</li>
+                    </ul>
+                </div>
+
+                <div class="data-card">
+                    <h3>C. AI Daily Insight Processing Data (User-activated)</h3>
+                    <p>If you enable the 'AI Daily Insight' feature, the following data is temporarily processed on our
+                        servers for nightly summaries:</p>
+                    <ul>
+                        <li><strong>De-identified Activity Summary:</strong> Activity types and place categories (e.g.,
+                            home, office, cafe) by time of day. <span class="important-text">※ All specific place names
+                                or detailed addresses are removed before transmission.</span></li>
+                        <li><strong>Diary Text:</strong> Optional diary entries written by the user for that day.</li>
+                        <li><strong>Protection and Deletion:</strong> Transmitted data is NEVER used to train AI models
+                            and is destroyed from server memory immediately after insight generation. (Encrypted for 30
+                            days for security monitoring per OpenAI policy, then permanently destroyed).</li>
+                    </ul>
+                </div>
+
+                <div class="data-card">
+                    <h3>D. Anonymous Statistics for Service Improvement</h3>
+                    <ul>
+                        <li><strong>Feature Preferences:</strong> Simple counts of which insight styles
+                            (Emotional/Rational) are preferred. This is managed as purely anonymous statistics that
+                            cannot identify individuals.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h2>3. Special Permissions Information</h2>
+                <p>This app requests the following Android system permissions for automatic logging:</p>
                 <ul>
-                    <li><strong>비식별화된 활동 요약:</strong> 시간대별 활동 유형과 장소 카테고리(예: 집, 회사, 카페) 정보. <span class="important-text">※ 사용자가 직접 설정한 고유 지점명이나 상세 주소는 전송 전 모두 제거됩니다.</span></li>
-                    <li><strong>일기 텍스트:</strong> 사용자가 당일 작성한 일기 내용(선택 사항).</li>
-                    <li><strong>데이터 보호 및 파기:</strong> 전송된 데이터는 AI 모델의 학습(Training)에 절대 활용되지 않으며, 인사이트 생성 즉시 서버 메모리에서 소멸됩니다. (OpenAI API 정책에 따라 보안 모니터링을 위해 암호화된 상태로 30일간 보관 후 영구 파기)</li>
+                    <li><strong>Background Location Access:</strong> Essential for detecting location changes even when
+                        the app is not on screen to build a seamless timeline.</li>
+                    <li><strong>Usage Information Access:</strong> Used to intelligently infer what the user is doing by
+                        querying app usage time.</li>
                 </ul>
-            </div>
+            </section>
 
-            <div class="data-card">
-                <h3>D. 서비스 개선을 위한 익명 통계</h3>
+            <section>
+                <h2>4. Legal Basis for Processing (EEA Users)</h2>
+                <p>For users in the European Economic Area (EEA), we process data based on the following legal grounds
+                    under the GDPR:</p>
                 <ul>
-                    <li><strong>익명 기능 선호도:</strong> 사용자가 어떤 인사이트 스타일(감성형/이성형)을 선호하는지에 대한 단순 카운트 데이터를 수집합니다. 해당 정보는 개인을 식별하거나 다른 데이터와 결합될 수 없는 완전한 익명 통계로 관리됩니다.</li>
+                    <li><strong>Consent:</strong> For cloud synchronization and AI-driven insights.</li>
+                    <li><strong>Contractual Necessity:</strong> To provide the core automatic logging and timeline
+                        services.</li>
                 </ul>
-            </div>
-        </section>
+            </section>
 
-        <section>
-            <h2>3. 특수 권한 사용 안내</h2>
-            <p>본 앱은 자동 기록 기능을 위해 안드로이드 시스템의 다음 권한을 요청합니다.</p>
-            <ul>
-                <li><strong>백그라운드 위치 액세스:</strong> 앱이 화면에 떠 있지 않을 때도 위치 변화를 감지하여 끊김 없는 타임라인을 구성하기 위해 필수적입니다.</li>
-                <li><strong>사용 정보 액세스:</strong> 앱별 사용 시간을 쿼리하여 현재 사용자가 무엇을 하고 있는지 지능적으로 추론하기 위해 사용됩니다.</li>
-            </ul>
-        </section>
-
-        <section>
-            <h2>4. 데이터 보관 및 파기</h2>
-            <p>로컬 데이터는 앱 삭제 시 함께 제거됩니다. 클라우드 동기화를 사용 중인 경우, <strong>앱 내 '설정 > 계정 관리' 메뉴의 [계정 삭제]</strong> 기능을 통해 서버에 보관된 모든 암호화 데이터를 즉시 영구 삭제할 수 있습니다.</p>
-        </section>
-
-        <section id="delete-account">
-            <h2>5. 웹을 통한 계정 및 데이터 삭제 요청</h2>
-            <p>앱을 이미 삭제했거나 앱에 접속할 수 없는 경우, 아래의 방법으로 데이터 삭제를 요청하실 수 있습니다.</p>
-            <div class="contact-box">
+            <section>
+                <h2>5. Data Subject Rights (GDPR)</h2>
+                <p>You have the following rights regarding your personal data:</p>
                 <ul>
-                    <li><strong>요청 방법:</strong> 지원 이메일로 가입 시 사용한 Google 계정 정보를 기재하여 발송</li>
-                    <li><strong>이메일 주소:</strong> <a href="mailto:support@franholdings.cloud?subject=DidI 계정 삭제 요청">support@franholdings.cloud</a></li>
-                    <li><strong>처리 기간:</strong> 접수 후 영업일 기준 7일 이내 데이터 파기 및 회신</li>
+                    <li><strong>Right to Access & Portability:</strong> You can request a copy of your data through app
+                        settings.</li>
+                    <li><strong>Right to Rectification:</strong> You can correct any inaccurate information within the
+                        app.</li>
+                    <li><strong>Right to Erasure ('Right to be Forgotten'):</strong> You can delete all data via the
+                        'Delete Account' menu.</li>
+                    <li><strong>Right to Lodge a Complaint:</strong> You have the right to complain to your local Data
+                        Protection Authority.</li>
                 </ul>
-            </div>
-        </section>
+            </section>
 
-        <section>
-            <h2>6. 제3자 서비스 제공</h2>
-            <p>안정적인 서비스 제공 및 고품질 AI 인사이트 생성을 위해 아래 외부 서비스를 활용합니다. 각 서비스는 엄격한 데이터 보호 표준을 준수합니다.</p>
-            <ul>
-                <li><strong>Google Firebase:</strong> 사용자 인증(Auth), 암호화된 데이터 보관(Firestore) 및 익명 통계 수집(Analytics)을 위한 인프라 제공.</li>
-                <li><strong>OpenAI:</strong> AI 데일리 인사이트 메시지 생성을 위한 인공지능 엔진 제공. (전송된 데이터는 모델 학습에 사용되지 않음)</li>
-            </ul>
-        </section>
+            <section>
+                <h2>6. International Data Transfers</h2>
+                <p>We use **Google Firebase** and **OpenAI**, whose servers are located in the United States. We ensure
+                    that your data is protected using Standard Contractual Clauses (SCCs) and other appropriate
+                    safeguards for international transfers.</p>
+            </section>
 
-        <section>
-            <h2>7. 문의처</h2>
-            <div class="contact-box">
-                <p>프라이버시 정책과 관련하여 궁금한 점이 있으시다면 아래로 연락 부탁드립니다.</p>
-                <p style="margin-top: 10px;"><strong>지원 팀:</strong> support@franholdings.cloud</p>
-            </div>
-        </section>
+            <section>
+                <h2>7. Data Retention and Destruction</h2>
+                <p>Local data is removed when the app is uninstalled. For cloud sync users, you can permanently delete
+                    all encrypted data on the server via the <strong>'Settings > Account Management > Delete
+                        Account'</strong> menu within the app.</p>
+            </section>
+
+            <section id="delete-account-en">
+                <h2>8. Requesting Account and Data Deletion via Web</h2>
+                <p>If you have already deleted the app or cannot access it, you can request data deletion using the
+                    method below:</p>
+                <div class="contact-box">
+                    <ul>
+                        <li><strong>Method:</strong> Email your request with the Google account used during
+                            registration.</li>
+                        <li><strong>Email:</strong> <a
+                                href="mailto:support@franholdings.cloud?subject=DidI Data Deletion Request">support@franholdings.cloud</a>
+                        </li>
+                        <li><strong>Processing Time:</strong> Data destruction and confirmation within 7 business days.
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h2>9. Third-party Service Providers</h2>
+                <p>To provide stable services and high-quality AI insights, we utilize the following external services,
+                    each adhering to strict data protection standards:</p>
+                <ul>
+                    <li><strong>Google Firebase:</strong> Provides infrastructure for authentication (Auth), encrypted
+                        storage (Firestore), and anonymous statistics (Analytics).</li>
+                    <li><strong>OpenAI:</strong> Provides the AI engine for generating daily insight messages.
+                        (Transmitted data is NOT used for model training).</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>10. Contact Information</h2>
+                <div class="contact-box">
+                    <p>Support Team: <a href="mailto:support@franholdings.cloud">support@franholdings.cloud</a></p>
+                </div>
+            </section>
+        </div>
+
+        <!-- JAPANESE CONTENT (FULL DETAIL) -->
+        <div data-lang-content="ja">
+            <header>
+                <h1>なにやったっけ (DidI)</h1>
+                <p class="last-updated"><span id="last-updated-label-ja">最終更新日:</span> <span class="last-updated-date"></span></p>
+            </header>
+
+            <section>
+                <h2>1. データ処理の原則</h2>
+                <p><strong>「なにやったっけ
+                        (DidI)」</strong>アプリは、お客様のプライバシーを最優先に考えています。本サービスは、日常データを端末内で処理する<strong>「ローカルファースト」</strong>の哲学に基づき、AI機能を含むすべてのサービスにおいて、個人を特定できる情報を外部に無断で露出しないことを絶対原則としています。
+                </p>
+                <div class="highlight-box">
+                    <p>詳細な位置情報やアプリの使用履歴は技術的に保護されており、AI分析などのサーバー処理が必要な場合でも、特定の場所名を除去するなど、徹底した非識別化プロセスを経ています。</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>2. 収集および活用するデータ項目</h2>
+                <p>アプリの主要機能である「自動活動記録」を提供するため、以下の情報にアクセスし、処理を行います。</p>
+
+                <div class="data-card">
+                    <h3>A. 端末内のローカル処理データ（サーバー送信なし）</h3>
+                    <ul>
+                        <li><strong>位置情報 (Background Location):</strong> 一日の移動経路および滞在場所を把握し、タイムラインを構成するために使用されます。</li>
+                        <li><strong>アプリ使用統計 (Usage Stats):</strong> 特定の時刻にどのアプリを使用していたかを分析し、活動（例：勉強、SNS、動画視聴など）を推論します。
+                        </li>
+                        <li><strong>活動認識 (Activity Recognition):</strong> お客様の移動状態（徒歩、車移動、停止）を検知し、記録の正確度を高めます。</li>
+                    </ul>
+                </div>
+
+                <div class="data-card">
+                    <h3>B. オプションのクラウド同期データ（ユーザー選択時）</h3>
+                    <p>機種変更やデータバックアップのために「クラウド同期」を有効にした場合に限り、以下のデータをサーバーに保管します。</p>
+                    <ul>
+                        <li><strong>暗号化された活動記録:</strong>
+                            タイムラインデータおよびユーザー設定情報。すべてのデータは**軍事レベルのAES-256暗号化**を施して保存され、ユーザー本人以外は解読できません。</li>
+                        <li><strong>ソーシャルログイン識別子:</strong> Googleアカウントによる認証情報（本人確認およびデータの所有権確認用）。</li>
+                    </ul>
+                </div>
+
+                <div class="data-card">
+                    <h3>C. AI デイリーインサイト処理データ（ユーザー有効時）</h3>
+                    <p>「AI デイリーインサイト」機能を有効にした場合、毎晩の一日の要約のために以下のデータを一時的にサーバーで処理します。</p>
+                    <ul>
+                        <li><strong>非識別化された活動概要:</strong> 時間帯別の活動タイプと場所カテゴリ（例：自宅、会社、カフェ）情報。<span
+                                class="important-text">※ ユーザーが設定した固有の地点名や詳細な住所は、送信前にすべて削除されます。</span></li>
+                        <li><strong>日記テキスト:</strong> お客様がその日に作成した日記の内容（任意）。</li>
+                        <li><strong>データ保護および破棄:</strong>
+                            送信されたデータはAIモデルの学習（Training）には一切使用されず、インサイト生成後、即座にサーバーのメモリから消去されます。（OpenAIのポリシーに基づき、セキュリティ監視のために暗号化された状態で30日間保管された後、永久に破棄されます）。
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="data-card">
+                    <h3>D. サービス改善のための匿名統計</h3>
+                    <ul>
+                        <li><strong>機能設定の好み:</strong>
+                            どのインサイトスタイル（感情型/論理型）が好まれているかなどの単純なカウントデータ。個人を特定できない完全な匿名統計として管理されます。</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h2>3. 特殊権限の使用案内</h2>
+                <p>本アプリは、自動記録機能のためにAndroidシステムの以下の権限をリクエストします。</p>
+                <ul>
+                    <li><strong>バックグラウンド位置情報の利用:</strong> アプリが画面に表示されていないときでも位置の変化を検知し、途切れのないタイムラインを構築するために不可欠です。</li>
+                    <li><strong>使用状況へのアクセス:</strong> アプリごとの使用時間をクエリし、現在お客様が何をしているかをインテリジェントに推論するために使用されます。</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>4. データの保管と破棄</h2>
+                <p>ローカルデータはアプリ削除時に同時に除去されます。クラウド同期を使用している場合は、アプリ内の<strong>「設定 > アカウント管理 >
+                        アカウント削除」</strong>機能を通じて、サーバーに保管されたすべての暗号化データを即座に永久削除できます。</p>
+            </section>
+
+            <section id="delete-account-ja">
+                <h2>5. Webを通じたアカウントおよびデータの削除リクエスト</h2>
+                <p>アプリをすでに削除した場合やアプリにアクセスできない場合は、以下の方法でデータの削除をリクエストできます。</p>
+                <div class="contact-box">
+                    <ul>
+                        <li><strong>リクエスト方法:</strong> サポートメールに、登録時に使用したGoogleアカウント情報を記載して送信</li>
+                        <li><strong>メールアドレス:</strong> <a
+                                href="mailto:support@franholdings.cloud?subject=DidI アカウント削除リクエスト">support@franholdings.cloud</a>
+                        </li>
+                        <li><strong>処理期間:</strong> 受付後、営業日基準で7日以内にデータを破棄し、回答いたします</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h2>6. 第三者サービスの提供</h2>
+                <p>安定したサービスの提供および高品質なAIインサイト生成のために、以下の外部サービスを活用しています。各サービスは厳格なデータ保護基準を遵守しています。</p>
+                <ul>
+                    <li><strong>Google Firebase:</strong>
+                        ユーザー認証(Auth)、暗号化データの保管(Firestore)、および匿名統計収集(Analytics)のためのインフラを提供。</li>
+                    <li><strong>OpenAI:</strong> AI デイリーインサイトメッセージ生成のための人工知能エンジンを提供（送信されたデータはモデル学習には使用されません）。</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>7. お問い合わせ</h2>
+                <div class="contact-box">
+                    <p>サポートチーム: <a href="mailto:support@franholdings.cloud">support@franholdings.cloud</a></p>
+                </div>
+            </section>
+        </div>
 
         <div class="footer">
             &copy; <span id="display-year"></span> Franholdings. All rights reserved.
@@ -276,7 +641,99 @@
     </div>
 
     <script>
+        // 날짜 수정은 여기서 한 번만 하시면 모든 언어에 반영됩니다.
+        const UPDATE_DATE = {
+            year: 2026,
+            month: 4,
+            day: 18
+        };
+
         document.getElementById('display-year').innerText = new Date().getFullYear();
+
+        function setLanguage(lang) {
+            // Update buttons active state
+            const btns = document.querySelectorAll('.lang-btn');
+            btns[0].classList.toggle('active', lang === 'ko');
+            btns[1].classList.toggle('active', lang === 'en');
+            btns[2].classList.toggle('active', lang === 'ja');
+
+            // Show selected content
+            document.querySelectorAll('[data-lang-content]').forEach(content => {
+                content.classList.remove('active');
+                if (content.getAttribute('data-lang-content') === lang) {
+                    content.classList.add('active');
+                }
+            });
+
+            // Update localized dates
+            formatLocalizedDate(lang);
+
+            // Update page title
+            const titles = {
+                'ko': '뭐했지 (DidI) - 개인정보처리방침',
+                'en': 'DidI - Privacy Policy',
+                'ja': 'なにやったっけ (DidI) - プライバシーポリシー'
+            };
+            document.title = titles[lang];
+
+            // Save preference
+            localStorage.setItem('preferred-lang', lang);
+
+            // Re-handle Hash for anchor links after language switch
+            if (window.location.hash) {
+                const hash = window.location.hash;
+                const targetId = lang === 'ko' ? 'delete-account' : (lang === 'en' ? 'delete-account-en' : 'delete-account-ja');
+                if (hash === '#delete-account') {
+                    const el = document.getElementById(targetId);
+                    if (el) el.scrollIntoView();
+                }
+            }
+        }
+
+        function formatLocalizedDate(lang) {
+            const dateSpans = document.querySelectorAll('.last-updated-date');
+            let formattedDate = "";
+
+            if (lang === 'ko') {
+                formattedDate = `${UPDATE_DATE.year}년 ${UPDATE_DATE.month}월 ${UPDATE_DATE.day}일`;
+            } else if (lang === 'ja') {
+                formattedDate = `${UPDATE_DATE.year}年${UPDATE_DATE.month}月${UPDATE_DATE.day}日`;
+            } else {
+                // English: Month DD, YYYY
+                const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                formattedDate = `${months[UPDATE_DATE.month - 1]} ${UPDATE_DATE.day}, ${UPDATE_DATE.year}`;
+            }
+
+            dateSpans.forEach(span => {
+                span.innerText = formattedDate;
+            });
+        }
+
+        // Auto Detection
+        function detectLanguage() {
+            const savedLang = localStorage.getItem('preferred-lang');
+            if (savedLang) {
+                setLanguage(savedLang);
+                return;
+            }
+
+            const browserLang = navigator.language.toLowerCase();
+            if (browserLang.startsWith('ko')) {
+                setLanguage('ko');
+            } else if (browserLang.startsWith('ja')) {
+                setLanguage('ja');
+            } else {
+                setLanguage('en');
+            }
+        }
+
+        detectLanguage();
+
+        // Listen for hash changes (for Play Store link compatibility)
+        window.addEventListener('hashchange', () => {
+            const lang = localStorage.getItem('preferred-lang') || 'en';
+            setLanguage(lang);
+        });
     </script>
 
 </body>
