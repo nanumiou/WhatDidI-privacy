@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>뭐했지 (WhatDidI) - 개인정보처리방침 (Privacy Policy)</title>
+    <title>뭐했지 (DidI) - 개인정보처리방침 (Privacy Policy)</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Outfit:wght@500;700&display=swap"
@@ -174,14 +174,14 @@
 
     <div class="container">
         <header>
-            <h1>뭐했지 (WhatDidI)</h1>
+            <h1>뭐했지 (DidI)</h1>
             <p>개인정보처리방침 (Privacy Policy)</p>
             <p class="last-updated">최종 수정일: 2026년 4월 18일</p>
         </header>
 
         <section>
             <h2>1. 데이터 처리 원칙</h2>
-            <p><strong>"뭐했지 (WhatDidI)"</strong> 앱은 사용자의 프라이버시를 최우선으로 생각합니다. 본 서비스는 사용자의 일상 데이터를 기기 내부에서 처리하는 <strong>'로컬 우선(Local-first)'</strong> 철학을 유지하며, AI 기능을 포함한 모든 서비스에서 개인을 식별할 수 있는 정보를 외부에 무단으로 노출하지 않는 것을 절대 원칙으로 합니다.</p>
+            <p><strong>"뭐했지 (DidI)"</strong> 앱은 사용자의 프라이버시를 최우선으로 생각합니다. 본 서비스는 사용자의 일상 데이터를 기기 내부에서 처리하는 <strong>'로컬 우선(Local-first)'</strong> 철학을 유지하며, AI 기능을 포함한 모든 서비스에서 개인을 식별할 수 있는 정보를 외부에 무단으로 노출하지 않는 것을 절대 원칙으로 합니다.</p>
             <div class="highlight-box">
                 <p>앱을 통해 기록되는 상세 위치와 앱 사용 기록은 기술적으로 보호되며, AI 분석 등 서버 처리가 필요한 경우에도 개인 장소명을 제거하는 등 철저한 비식별화 과정을 거칩니다.</p>
             </div>
@@ -247,7 +247,7 @@
             <div class="contact-box">
                 <ul>
                     <li><strong>요청 방법:</strong> 지원 이메일로 가입 시 사용한 Google 계정 정보를 기재하여 발송</li>
-                    <li><strong>이메일 주소:</strong> <a href="mailto:support@franholdings.cloud?subject=WhatDidI 계정 삭제 요청">support@franholdings.cloud</a></li>
+                    <li><strong>이메일 주소:</strong> <a href="mailto:support@franholdings.cloud?subject=DidI 계정 삭제 요청">support@franholdings.cloud</a></li>
                     <li><strong>처리 기간:</strong> 접수 후 영업일 기준 7일 이내 데이터 파기 및 회신</li>
                 </ul>
             </div>
@@ -271,9 +271,13 @@
         </section>
 
         <div class="footer">
-            &copy; 2026 WhatDidI. All rights reserved.
+            &copy; <span id="display-year"></span> Franholdings. All rights reserved.
         </div>
     </div>
+
+    <script>
+        document.getElementById('display-year').innerText = new Date().getFullYear();
+    </script>
 
 </body>
 
